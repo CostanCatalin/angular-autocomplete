@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { InputAutocompleteComponent } from './input-autocomplete.component';
@@ -33,14 +33,10 @@ describe('InputAutocompleteComponent', () => {
     expect(component.isFocused).toBeFalse();
     expect(options).toBeFalsy();
 
-    input.focus();
-    // input.dispatchEvent(new Event("focus"));
-
+    input.dispatchEvent(new Event("focus"));
     fixture.detectChanges();
-    // flush();
 
     options = fixture.debugElement.query(By.css(optionsSelector));
-    // expect(component.isFocused).toBeTrue();
     expect(options).toBeTruthy();
   });
 
@@ -50,9 +46,7 @@ describe('InputAutocompleteComponent', () => {
     const input = fixture.debugElement.query(By.css(inputSelector)).nativeElement;
     input.value = searchTerm;
     input.dispatchEvent(new Event("input"));
-    // component.control.setValue(searchTerm);
-
 
     expect(component.searchEvent.emit).toHaveBeenCalledWith(searchTerm);
-  });
+  }));
 });

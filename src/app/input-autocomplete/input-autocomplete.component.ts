@@ -1,6 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ContentChildren, QueryList, Output , EventEmitter} from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Component, ChangeDetectionStrategy, ContentChildren, QueryList, Output , EventEmitter } from '@angular/core';
 import { AutocompleteOptionComponent } from '../autocomplete-option/autocomplete-option.component';
 
 @Component({
@@ -9,23 +7,13 @@ import { AutocompleteOptionComponent } from '../autocomplete-option/autocomplete
   styleUrls: ['./input-autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputAutocompleteComponent implements OnInit {
+export class InputAutocompleteComponent {
   isFocused = false;
-  control = new FormControl('');
-  private searchTerms = new Subject<string>();
   @Output() searchEvent = new EventEmitter<string>();
   @ContentChildren(AutocompleteOptionComponent) options$!: QueryList<AutocompleteOptionComponent>;
 
-  // optionClicked(optionValue: string) {
-  //   this.control.setValue(optionValue);
-  // }
-
-  search(term: string): void {
-    this.searchTerms.next(term);
-  }
-
-  ngOnInit(): void {
-    this.control.valueChanges.subscribe(value => this.searchEvent.emit(value));
+  onInput(event: Event) {
+    this.searchEvent.emit((<HTMLInputElement>event.target).value || '');
   }
 
   onFocus() {

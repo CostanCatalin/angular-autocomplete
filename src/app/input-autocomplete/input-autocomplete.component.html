@@ -1,4 +1,5 @@
-<input type="text" [formControl]="control"
+<input type="text"
+(input)="onInput($event)"
 (focus)="onFocus()" 
 (blur)="onBlur()">
 <div class="options" *ngIf="isFocused">
