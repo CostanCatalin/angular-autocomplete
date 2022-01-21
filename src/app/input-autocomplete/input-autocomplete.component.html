@@ -1,0 +1,6 @@
+<input type="text" [formControl]="control"
+(focus)="onFocus()" 
+(blur)="onBlur()">
+<div class="options" *ngIf="isFocused">
+    <ng-content></ng-content>
+</div>

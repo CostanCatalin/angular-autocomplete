@@ -1,0 +1,11 @@
+:host {
+    display: block;
+    padding: 10px 16px;
+    margin: 0;
+
+    cursor: pointer;
+
+    &:hover {
+        background: rgba(0,0,0,.04);
+    }
+}
